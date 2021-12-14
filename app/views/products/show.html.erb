@@ -1,0 +1,18 @@
+<h1> <%= @product.title %> </h1>
+
+<p> <%= @product.description %> </p>
+
+<ul>
+	<li> <%= link_to "Edit", edit_product_path(@product) %> </li>
+	<li>
+		<%= link_to "Destroy", product_path(@product),
+								method: :delete,
+								data: {confirm: "Are you sure?"} %>
+	</li>
+	<li>
+		<%= link_to "Products", products_path%>
+	</li>	
+	<li>
+		<%= link_to "Add to cart", user_cart_add_path(@product.id) %>
+	</li>	
+</ul>	
