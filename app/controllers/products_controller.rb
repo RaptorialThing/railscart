@@ -35,10 +35,12 @@ before_action :authenticate_user!, :except => [:index]
 
   def update
     @product = Product.find(params[:id])
-
+       
     if @product.update(product_params)
       redirect_to @product
-    else
+    elsif @product.user != current_user.id 
+      flash[:notice] = "its not your own product"
+    else  
       render :edit
     end 
   end 
@@ -46,8 +48,12 @@ before_action :authenticate_user!, :except => [:index]
         
   def destroy
     @product = Product.find(params[:id])
-    @product.destroy
-
+    if @product.user.id != current_user.id 
+       flash[:notice] = "its not your own product"
+    else  
+      @product.destroy
+    end
+    
     redirect_to root_path
   end
 

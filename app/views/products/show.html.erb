@@ -13,6 +13,6 @@
 		<%= link_to "Products", products_path%>
 	</li>	
 	<li>
-		<%= link_to "Add to cart", user_cart_add_path(@product.id) %>
+		<%= link_to "Add to cart", products_user_cart_create_path(product_id: @product.id)%>
 	</li>	
 </ul>	
