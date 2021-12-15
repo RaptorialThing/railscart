@@ -1,6 +1,14 @@
-<h1> <%= @product.title %> </h1>
-
-<p> <%= @product.description %> </p>
+<div class="flex font-sans">	
+<h1 class="flex-auto font-semibold"> 
+	Title: <%= @product.title %> </h1>
+<div class="flex-auto p-6">
+<div class="w-full flex-none text-sm font-medium">
+<h2 class="flex-auto font-semibold">	Description
+</h2>	
+<%= @product.description %> 
+</div>
+<div class="flex flex-wrap">
+<div class="flex items-baseline mt-4 mb-6 border-b border-gray-200">
 
 <ul>
 	<li> <%= link_to "Edit", edit_product_path(@product) %> </li>
@@ -16,3 +24,7 @@
 		<%= link_to "Add to cart", products_user_cart_create_path(product_id: @product.id)%>
 	</li>	
 </ul>	
+</div>
+</div>
+</div>
+</div>
