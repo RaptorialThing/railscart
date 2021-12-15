@@ -1,9 +1,14 @@
 class UserCartsController < ApplicationController
 	before_action :authenticate_user!
 	def add
-		product = Product.find(params[:id])
-		@user_cart = product.user_cart.find_or_create_by(user_id: current_user.id)
-		redirect_to @user_cart
+		@user_cart = UserCart.first_or_create(user_id: current_user.id)
+		@product_user = ProductsUserCart.create(user_cart_id:@user_cart.id, product_id: params[:id])
+		if @product_user.save
+		   redirect_to @user_cart
+	    else
+	    	flash[:notice] = "Cant add to cart"
+	    	redirect_back fallback_location: products_path
+	    end		   
 	end	
 
 
@@ -14,9 +19,10 @@ class UserCartsController < ApplicationController
 
 
 	def destroy
-		@user_cart = UserCart.find(params[:id])
-		@user_cart.destroy
+		@product_user_cart = ProductsUserCart.find(params[:id])
+		@product_user_cart.destroy
 
-		redirect_to products_path
+		id = User.find(current_user.id).user_cart.id
+		redirect_to user_cart_path(id)
 	end	
 end

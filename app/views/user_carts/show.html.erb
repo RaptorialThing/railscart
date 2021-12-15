@@ -1,16 +1,17 @@
 <h1> My cart </h1>
 
-<% @products.each do |product| %>
 <ul>
+<% @products.each do |product| %>
 	<li>
 		<%= link_to product.title, product_path(product.id) %>
-		<%= link_to "Delete", user_cart_path(@user_cart),
+		<%= link_to "Delete", products_user_cart_path(product.id),
 								method: :delete,
 								data: {confirm: "Are you sure?"} %>
 	</li>	
 	<br/>
+
+<% end %>
 	<li>
 		<%= link_to "Products", products_path%>
 	</li>	
 </ul>	
-<% end %>
